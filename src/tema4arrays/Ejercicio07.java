@@ -7,17 +7,22 @@ public class Ejercicio07 {
 
 	public static void main(String[] args) {
 		// Tabla para guardar los numeros de la primitiva
-		int primitiva[] = new int[6];
+		int primitiva[] = {1, 2, 3, 32, 44, 13};
 
 		// Tabla para guardar los numeros de la apuesta
 		int apuesta[] = new int[6];
 		
+		//Random para crear numeros aleatorios
+		Random r = new Random();
+		
 		//Variable para guardar la cantidad de numeros que coinciden
 		int aciertos=0;
 
-		//Asigno valores a cada tabla
-		primitiva= generaNumeros();
-		apuesta= generaNumeros();
+		//Asigno valores a la tabla de apuesta
+		for (int i = 0; i < apuesta.length; i++) {
+			apuesta[i] = r.nextInt(1,10);
+			apuesta = compruebaNumeros(apuesta, i);
+		}
 		
 		// Ordeno los valores de las tablas para hacer una busqueda binaria
 		Arrays.sort(primitiva);
@@ -30,6 +35,12 @@ public class Ejercicio07 {
 			}
 		}
 		
+		//Muestro la tabla de apuesta
+		System.out.println(Arrays.toString(apuesta));
+		
+		//Muestro la tabla de primitiva
+		System.out.println(Arrays.toString(primitiva));
+		
 		//Muestro el número de aciertos
 		System.out.println("Has acertado " + aciertos + " numeros");
 	}
@@ -41,9 +52,20 @@ public class Ejercicio07 {
 
 		// Bucle para asignar a cada espacio de la tabla un número
 		for (int i = 0; i < tabla.length; i++) {
-			tabla[i] = r.nextInt(1,50);
+			tabla[i] = r.nextInt(1,10);
 		}
 		
 		return tabla;
+	}
+	
+	public static int[] compruebaNumeros(int apuesta[], int posicion) {
+		Random r = new Random();
+		for (int j = 0; j<posicion; j++) {
+			if(apuesta[posicion]==apuesta[j]) {
+				apuesta[posicion] = r.nextInt(1,10);
+				compruebaNumeros(apuesta, posicion);
+			}
+		}
+		return apuesta;
 	}
 }
