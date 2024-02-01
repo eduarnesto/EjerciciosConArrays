@@ -20,8 +20,8 @@ public class Ejercicio07 {
 
 		//Asigno valores a la tabla de apuesta
 		for (int i = 0; i < apuesta.length; i++) {
-			apuesta[i] = r.nextInt(1,10);
-			apuesta = compruebaNumeros(apuesta, i);
+			apuesta[i] = r.nextInt(1,50);
+			compruebaNumeros(apuesta, i);
 		}
 		
 		// Ordeno los valores de las tablas para hacer una busqueda binaria
@@ -52,20 +52,19 @@ public class Ejercicio07 {
 
 		// Bucle para asignar a cada espacio de la tabla un número
 		for (int i = 0; i < tabla.length; i++) {
-			tabla[i] = r.nextInt(1,10);
+			tabla[i] = r.nextInt(1,50);
 		}
 		
 		return tabla;
 	}
 	
-	public static int[] compruebaNumeros(int apuesta[], int posicion) {
+	public static void compruebaNumeros(int apuesta[], int posicion) {
 		Random r = new Random();
 		for (int j = 0; j<posicion; j++) {
 			if(apuesta[posicion]==apuesta[j]) {
-				apuesta[posicion] = r.nextInt(1,10);
+				apuesta[posicion] = r.nextInt(1,50);
 				compruebaNumeros(apuesta, posicion);
 			}
 		}
-		return apuesta;
 	}
 }
